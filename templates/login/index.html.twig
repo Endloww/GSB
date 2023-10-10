@@ -1,0 +1,72 @@
+{# templates/login/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{# ... #}
+
+
+{% block body %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+
+    <center>
+        <br />
+        <h1>Connexion</h1>
+        <br />
+
+        <form action="{{ path('app_login') }}" method="post">
+
+            <div class="row g-3">
+                <div class="col-4">
+                </div>
+                <div class="col-2">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" style="text-align:center;" class="form-control" placeholder="Adresse Email" aria-label="Adresse Email">
+                    <label for="username">Email</label>
+                </div>
+
+                <div class="col-2">
+                    <input type="password" id="password" name="_password" style="text-align:center;" class="form-control" placeholder="Mot de Passe" aria-label="Mot de Passe">
+                </div>
+            </div>
+            <br/>
+            <div class="checkbox mb-3">
+                <label id="remember-me-label">
+                    <input type="checkbox" value="se-souvenir" id="remember-me-checkbox"> Se souvenir de moi
+                </label>
+            </div>
+            <div id="remember-me-text" style="display: none;">Non je ne sais pas le faire</div> <!-- Texte initiallement masqué -->
+            <br/>
+
+            <label>
+                <button class="btn btn-lg btn-block custom-button" onclick="animateButton(this)"><span>Se connecter</span></button>
+                <input type="hidden" name="_target_path" value="/accueil">
+            </label>
+
+            <script>
+                const rememberMeCheckbox = document.getElementById('remember-me-checkbox');
+                const rememberMeLabel = document.getElementById('remember-me-label');
+                const rememberMeText = document.getElementById('remember-me-text');
+
+                rememberMeCheckbox.addEventListener('change', function () {
+                    if (rememberMeCheckbox.checked) {
+                        // Masquer la checkbox et son label et afficher le nouveau texte
+                        rememberMeCheckbox.style.display = 'none';
+                        rememberMeLabel.style.display = 'none';
+                        rememberMeText.style.display = 'block';
+                    } else {
+                        // Afficher la checkbox et son label et masquer le nouveau texte
+                        rememberMeCheckbox.style.display = 'block';
+                        rememberMeLabel.style.display = 'block';
+                        rememberMeText.style.display = 'none';
+                    }
+                });
+            </script>
+
+        </form>
+    </center>
+
+
+
+
+{% endblock %}
