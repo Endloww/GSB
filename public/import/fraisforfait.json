@@ -1,0 +1,6 @@
+[
+{"id":"ETP","libelle":"Forfait Etape","montant":"110.00"},
+{"id":"KM","libelle":"Frais Kilométrique","montant":"0.62"},
+{"id":"NUI","libelle":"Nuitée Hôtel","montant":"80.00"},
+{"id":"REP","libelle":"Repas Restaurant","montant":"25.00"}
+]
