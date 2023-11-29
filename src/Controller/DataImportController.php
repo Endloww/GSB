@@ -6,7 +6,9 @@ use App\Entity\Etat;
 use App\Entity\FicheFrais;
 use App\Entity\FraisForfait;
 use App\Entity\LigneFraisForfait;
+use App\Entity\LigneFraisHorsForfait;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -61,7 +63,7 @@ class DataImportController extends AbstractController
     }
 
 
-    #[Route('/fiche', name: 'app_data_import_fiche')]
+    #[Route('/ficheImport', name: 'app_data_import_fiche')]
     public function fiche(UserPasswordHasherInterface $passwordHasher, ManagerRegistry $doctrine): Response
     {
 
@@ -157,6 +159,72 @@ class DataImportController extends AbstractController
 
 
 
+
+        return $this->render('data_import/index.html.twig', [
+            'controller_name' => 'DataImportController',
+        ]);
+    }
+
+    #[Route('/data/import/lignefraisforfait', name: 'app_data_import_lignefraisforfait')]
+    public function indexLigneFF(ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher): Response
+    {
+        $ligneffjson = file_get_contents('./import/lignefraisforfait.json');
+        $LigneFFs = json_decode($ligneffjson, true);
+
+        foreach ($LigneFFs as $LigneFF) {
+
+            $newLigneFF = new LigneFraisForfait();
+            $newLigneFF->setQuantite($LigneFF["quantite"]);
+            switch ($LigneFF["idFraisForfait"]) {
+                case 'ETP':
+                    $fraisForfait = $doctrine->getRepository(FraisForfait::class)->find("1");
+                    break;
+                case 'KM':
+                    $fraisForfait = $doctrine->getRepository(FraisForfait::class)->find("2");
+                    break;
+                case 'NUI':
+                    $fraisForfait = $doctrine->getRepository(FraisForfait::class)->find("3");
+                    break;
+                case 'REP':
+                    $fraisForfait = $doctrine->getRepository(FraisForfait::class)->find("4");
+                    break;
+                default:
+                    $fraisForfait = $doctrine->getRepository(FraisForfait::class)->find("1");
+                    break;
+            }
+            $newLigneFF->setFraisForfait($fraisForfait);
+
+            $user = $doctrine->getRepository(User::class)->findOneBy(["old_id" => $LigneFF["idVisiteur"]]);
+            $newLigneFF->setFicheFrais($doctrine->getRepository(FicheFrais::class)->findOneBy(['user' => $user, 'mois' => $LigneFF["mois"]]));
+
+            $doctrine->getManager()->persist($newLigneFF);
+            $doctrine->getManager()->flush();
+        }
+
+        return $this->render('data_import/index.html.twig', [
+            'controller_name' => 'DataImportController',
+        ]);
+    }
+
+    #[Route('/data/import/lignefraishorsforfait', name: 'app_data_import_ligneff')]
+    public function indexLigneFHF(ManagerRegistry $doctrine, UserPasswordHasherInterface $passwordHasher): Response
+    {
+        $lignefhfjson = file_get_contents('./import/lignefraishorsforfait.json');
+        $LigneFHFs = json_decode($lignefhfjson, true);
+
+        foreach ($LigneFHFs as $LigneFHF) {
+
+            $newLigneFHF = new LigneFraisHorsForfait();
+            $newLigneFHF->setLibelle($LigneFHF['libelle']);
+            $newLigneFHF->setMontant($LigneFHF['montant']);
+            $user = $doctrine->getRepository(User::class)->findOneBy(["old_id" => $LigneFHF["idVisiteur"]]);
+            $newLigneFHF->setFicheFrais($doctrine->getRepository(FicheFrais::class)->findOneBy(['user' => $user, 'mois' => $LigneFHF["mois"]]));
+            $dateFHF = new DateTime($LigneFHF['date']);
+            $newLigneFHF->setDate($dateFHF);
+
+            $doctrine->getManager()->persist($newLigneFHF);
+            $doctrine->getManager()->flush();
+        }
 
         return $this->render('data_import/index.html.twig', [
             'controller_name' => 'DataImportController',
