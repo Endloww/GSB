@@ -1,0 +1,18 @@
+name: Deploy Azure self-hosted
+on:
+  release:
+    types: [published]
+jobs:
+  deploy-azure:
+    runs-on: [self-hosted]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: update code
+        run: |
+          cd /var/www/GSB
+          git reset --hard
+          git pull
+          composer update
+          symfony console doctrine:schema:update --force --complete
+          sudo chown -R azureuser:www-data *
