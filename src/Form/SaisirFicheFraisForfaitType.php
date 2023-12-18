@@ -11,10 +11,10 @@ class SaisirFicheFraisForfaitType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('Forfait Etape')
-            ->add('Frais Kilométrique')
-            ->add('Nuitée Hôtel')
-            ->add('Repas Restaurant')
+            ->add('ForfaitEtape')
+            ->add('FraisKilometrique')
+            ->add('NuiteeHotel')
+            ->add('RepasRestaurant')
         ;
     }
 

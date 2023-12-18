@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Etat;
 use App\Entity\LigneFraisHorsForfait;
 use App\Form\EtatType;
+use App\Form\SaisirFicheFraisForfaitType;
 use App\Form\SaisirFicheFraisHorsForfaitType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,7 +19,7 @@ class SaisirFicheFraisController extends AbstractController
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
 
-        $formFraisF = $this->createForm(SaisirFicheFraisHorsForfaitType::class);
+        $formFraisF = $this->createForm(SaisirFicheFraisForfaitType::class);
         $formFraisF->handleRequest($request);
 
         if ($formFraisF->isSubmitted() && $formFraisF->isValid()) {
