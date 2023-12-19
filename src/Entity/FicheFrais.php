@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\Double;
 
 #[ORM\Entity(repositoryClass: FicheFraisRepository::class)]
 class FicheFrais
@@ -46,6 +47,24 @@ class FicheFrais
     {
         $this->ligneFraisForfait = new ArrayCollection();
         $this->ligneFraisHorsForfait = new ArrayCollection();
+    }
+    public function getTotalFF(): ?float
+    {
+        $total = 0;
+
+        foreach ($this->ligneFraisForfait as $ligneFraisForfai) {
+            $total += $ligneFraisForfai->getMontant();
+        }
+        return $total;
+    }
+    public function getTotalFHF(): ?float
+    {
+        $total = 0;
+
+        foreach ($this->ligneFraisHorsForfait as $ligneFraisForfai) {
+            $total += $ligneFraisForfai->getMontant();
+        }
+        return $total;
     }
 
     public function getId(): ?int

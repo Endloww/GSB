@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use PhpParser\Node\Expr\Cast\Double;
 
 #[ORM\Entity(repositoryClass: FraisForfaitRepository::class)]
 class FraisForfait
@@ -20,7 +21,7 @@ class FraisForfait
     private ?string $libelle = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 7, scale: 2)]
-    private ?string $montant = null;
+    public ?string $montant = null;
 
     #[ORM\OneToMany(mappedBy: 'fraisForfait', targetEntity: LigneFraisForfait::class)]
     private Collection $ligneFraisForfait;
@@ -29,7 +30,6 @@ class FraisForfait
     {
         $this->ligneFraisForfait = new ArrayCollection();
     }
-
     public function getId(): ?int
     {
         return $this->id;

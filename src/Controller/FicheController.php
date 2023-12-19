@@ -35,4 +35,5 @@ class FicheController extends AbstractController
             'selectedFiche' => $selectedFiche,
         ]);
     }
+
 }
