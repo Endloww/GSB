@@ -7,7 +7,7 @@
         {% block stylesheets %}
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
             <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-            <link rel="stylesheet" href="chemin/vers/pikaday.css">
+            <link rel="stylesheet" href="{{ asset('css/style.css') }}">
         {% endblock %}
 
         {% block javascripts %}
@@ -31,7 +31,7 @@
 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a href="/saisir/fiche/frais">
+                        <a href="/saisir-fiche-frais">
                             <button class="btn btn-outline-dark rounded-2 me-2 custom-button" onclick="animateButton(this)" type="button"><b>SAISIR FICHE</b></button>
                         </a>
                     </li>
@@ -47,49 +47,6 @@
         </div>
     </nav>
 
-    <style>
-        /* Style initial du bouton */
-        .custom-button {
-            background-image: url('{{ asset('media/button.png') }}');
-            background-size: cover;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            z-index: 1; /* Pour que le texte reste au premier plan */
-            transition: transform 0.2s ease-in-out; /* Ajout d'une transition pour l'effet de pop */
-        }
-
-        /* Arrière-plan au survol */
-        .custom-button::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.2); /* Couleur de fond légèrement foncée au survol */
-            opacity: 0; /* Initialement transparent */
-            transition: opacity 0.3s ease-in-out;
-            z-index: -1; /* Pour que l'arrière-plan reste en arrière-plan */
-        }
-
-        .custom-button:hover::before {
-            opacity: 1; /* Au survol, l'arrière-plan devient légèrement opaque */
-        }
-
-        /* Couleur du texte */
-        .custom-button span {
-            color: white;
-            position: relative;
-            z-index: 2; /* Pour que le texte reste au premier plan */
-        }
-
-        /* Classe pour l'animation "pop" */
-        .pop {
-            transform: scale(0.50); /* Réduire légèrement la taille du bouton */
-        }
-    </style>
-
     <script>
         function animateButton(button) {
             button.classList.add('pop'); // Ajoute la classe pour l'animation "pop"
@@ -100,7 +57,8 @@
     </script>
 
 
-    <div class="bg-img" style="background-image: url('{{ asset('media/banniere.png') }}') ; height: 45vh;"></div>
+    <div class="bg-img" style="background-image: url('{{ asset('media/banniere.png') }}'); height: 45vh; width: 100%; background-size: cover; background-position: center;"></div>
+
     <br />
     <hr>
 

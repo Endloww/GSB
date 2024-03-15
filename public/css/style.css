@@ -1,0 +1,65 @@
+.example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+.example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+.center {text-align : center }
+.corpsForm {
+    border : solid 0.1em #000;
+    border-bottom-width:1px;
+
+    width : 80%;
+
+}
+.corpsForm legend {
+    font-weight:bold;
+    font-size:1.2em;
+}
+.corpsForm label{
+    float: left;
+    text-align:right;
+    width:33%;
+    margin: 0;
+    padding: 0 .5em 0 0;
+    line-height: 1.8;
+}
+.tinymce{
+    margin-bottom: 10px;
+}
+/* Style initial du bouton */
+.custom-button {
+    background-image: url("../media/button.png");
+    background-size: cover;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    z-index: 1; /* Pour que le texte reste au premier plan */
+    transition: transform 0.2s ease-in-out; /* Ajout d'une transition pour l'effet de pop */
+}
+
+/* Arrière-plan au survol */
+.custom-button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.2); /* Couleur de fond légèrement foncée au survol */
+    opacity: 0; /* Initialement transparent */
+    transition: opacity 0.3s ease-in-out;
+    z-index: -1; /* Pour que l'arrière-plan reste en arrière-plan */
+}
+
+.custom-button:hover::before {
+    opacity: 1; /* Au survol, l'arrière-plan devient légèrement opaque */
+}
+
+/* Couleur du texte */
+.custom-button span {
+    color: white;
+    position: relative;
+    z-index: 2; /* Pour que le texte reste au premier plan */
+}
+
+/* Classe pour l'animation "pop" */
+.pop {
+    transform: scale(0.50); /* Réduire légèrement la taille du bouton */
+}

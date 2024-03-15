@@ -3,30 +3,7 @@
 {% block title %}Hello FicheController!{% endblock %}
 
 {% block body %}
-    <style>
-        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-        .center {text-align : center }
-        .corpsForm {
-            border : solid 0.1em #000;
-            border-bottom-width:1px;
 
-            width : 80%;
-
-        }
-        .corpsForm legend {
-            font-weight:bold;
-            font-size:1.2em;
-        }
-        .corpsForm label{
-            float: left;
-            text-align:right;
-            width:33%;
-            margin: 0;
-            padding: 0 .5em 0 0;
-            line-height: 1.8;
-        }
-    </style>
     <div class="center">
         <h3 class="mb-3">
             Saisir une fiche frais
@@ -34,6 +11,7 @@
     </div>
 
 
+<div class="container">
 
     {{ form_start(formFraisF) }}
 
@@ -42,22 +20,36 @@
             <legend>Elements forfaitisés</legend>
             {{ form_widget(formFraisF) }}
         </fieldset>
+        <br/>
     </div>
-    <button type="submit" class="btn btn-dark custom-button mb-3 ps-5 pe-5 mt-3">{{ button_label|default('Valider') }}</button>
-    <button type="reset" class="btn btn-dark custom-button mb-3 ps-5 pe-5 mt-3">{{ button_label|default('Effacer') }}</button>
+    <div class="center">
+        <button type="submit" class="btn btn-dark custom-button mb-3 ps-5 pe-5 mt-3">{{ button_label|default('Valider') }}</button>
+        <button type="reset" class="btn btn-dark custom-button mb-3 ps-5 pe-5 mt-3">{{ button_label|default('Effacer') }}</button>
+    </div>
     {{ form_end(formFraisF) }}
 
 
-        <div class="encadre container">
+        <div class="encadre">
             <p>
 
             </p>
 
-            <h2> Eléments forfaitisés </h2>
+            <h2> Eléments hors forfaits</h2>
+            {{ form_start(formFraisHF) }}
+            <div class="corpsForm">
+                <fieldset>
+                    <legend>Elements hors forfaits</legend>
+                    {{ form_widget(formFraisHF) }}
 
+                </fieldset>
+                <br/>
+            </div>
+
+            {{ form_end(formFraisHF) }}
 
         </div>
-
+</div>
+    <br/><br/>
 
 
 {% endblock %}
