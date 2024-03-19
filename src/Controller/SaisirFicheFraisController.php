@@ -85,6 +85,21 @@ class SaisirFicheFraisController extends AbstractController
             return $this->redirectToRoute('app_etat_index', [], Response::HTTP_SEE_OTHER);
         }
 
+        $ficheMoisUser = $ficheFraisRepository->findOneBy(['user' => $this->getUser(), 'mois' => $moisActuel]);
+        if ($ficheMoisUser !== null) {
+            foreach ($ficheMoisUser->getLigneFraisForfait() as $ligneFraisForfait) {
+                if ($ligneFraisForfait->getFraisForfait()->getId() == 1) {
+                    $formFraisF->get('ForfaitEtape')->setData($ligneFraisForfait->getQuantite());
+                } elseif ($ligneFraisForfait->getFraisForfait()->getId() == 2) {
+                    $formFraisF->get('FraisKilometrique')->setData($ligneFraisForfait->getQuantite());
+                } elseif ($ligneFraisForfait->getFraisForfait()->getId() == 3) {
+                    $formFraisF->get('NuiteeHotel')->setData($ligneFraisForfait->getQuantite());
+                } else {
+                    $formFraisF->get('RepasRestaurant')->setData($ligneFraisForfait->getQuantite());
+                }
+            }
+        }
+
         $ligneFraisHorsForfait = new LigneFraisHorsForfait();
         $formFraisHF = $this->createForm(SaisirFicheFraisHorsForfaitType::class, $ligneFraisHorsForfait);
         $formFraisHF->handleRequest($request);

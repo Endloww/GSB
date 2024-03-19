@@ -25,21 +25,48 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
+            {% if app.user %}
+            <a href="/saisir-fiche-frais">
+                <img class="pe-3" src="{{ asset('media/Logo.png') }}"  alt="" style="width: 80px">
+            </a>
+            {% else %}
             <a href="/">
                 <img class="pe-3" src="{{ asset('media/Logo.png') }}"  alt="" style="width: 80px">
             </a>
+            {% endif %}
 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
+                        {% if app.user %}
                         <a href="/saisir-fiche-frais">
                             <button class="btn btn-outline-dark rounded-2 me-2 custom-button" onclick="animateButton(this)" type="button"><b>SAISIR FICHE</b></button>
                         </a>
+                        {% else %}
+                        <a href="/">
+                            <button class="btn btn-outline-dark rounded-2 me-2 custom-button" onclick="animateButton(this)" type="button"><b>SAISIR FICHE</b></button>
+                        </a>
+                        {% endif %}
                     </li>
                     <li class="nav-item">
+                        {% if app.user %}
                         <a href="/fiche">
                             <button class="btn btn-outline-dark rounded-2 me-2 custom-button " onclick="animateButton(this)" type="button"><b>MES FICHES</b></button>
                         </a>
+                        {% else %}
+                        <a href="/">
+                            <button class="btn btn-outline-dark rounded-2 me-2 custom-button " onclick="animateButton(this)" type="button"><b>MES FICHES</b></button>
+                        </a>
+                        {% endif %}
                     </li>
+
+                    <li class="nav-item">
+                        {% if app.user %}
+                        <a href="/logout">
+                            <button class="btn btn-outline-dark rounded-2 me-2 custom-button " onclick="animateButton(this)" type="button"><b>Déconnexion</b></button>
+                        </a>
+                        {% endif %}
+                    </li>
+
                 </ul>
 
 
