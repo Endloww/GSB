@@ -59,6 +59,10 @@
     z-index: 2; /* Pour que le texte reste au premier plan */
 }
 
+.inputMargin{
+    margin-bottom: 10px;
+}
+
 /* Classe pour l'animation "pop" */
 .pop {
     transform: scale(0.50); /* Réduire légèrement la taille du bouton */

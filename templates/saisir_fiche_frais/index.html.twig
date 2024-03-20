@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FicheController!{% endblock %}
+{% block title %}Bienvenue{% endblock %}
 
 {% block body %}
 
@@ -42,7 +42,10 @@
                 </fieldset>
                 <br/>
             </div>
-
+            <div class="center">
+                <button type="submit" class="btn btn-dark custom-button mb-3 ps-5 pe-5 mt-3">{{ button_label|default('Valider') }}</button>
+                <button type="reset" class="btn btn-dark custom-button mb-3 ps-5 pe-5 mt-3">{{ button_label|default('Effacer') }}</button>
+            </div>
             {{ form_end(formFraisHF) }}
 
         </div>

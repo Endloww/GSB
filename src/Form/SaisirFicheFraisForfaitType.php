@@ -13,20 +13,16 @@ class SaisirFicheFraisForfaitType extends AbstractType
     {
         $builder
             ->add('ForfaitEtape', IntegerType::class,  [
-                'attr' => ['class' => 'tinymce'],
-                'attr' => ['min' => '0']
+                'attr' => ['class' => 'inputMargin', 'min' => '0']
             ])
             ->add('FraisKilometrique', IntegerType::class,  [
-                'attr' => ['class' => 'tinymce'],
-                'attr' => ['min' => '0']
+                'attr' => ['class' => 'inputMargin', 'min' => '0']
             ])
             ->add('NuiteeHotel', IntegerType::class,  [
-                'attr' => ['class' => 'tinymce'],
-                'attr' => ['min' => '0']
+                'attr' => ['class' => 'inputMargin', 'min' => '0']
             ])
             ->add('RepasRestaurant', IntegerType::class,  [
-                'attr' => ['class' => 'tinymce'],
-                'attr' => ['min' => '0']
+                'attr' => ['class' => 'inputMargin', 'min' => '0']
             ])
         ;
     }

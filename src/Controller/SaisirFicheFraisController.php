@@ -105,6 +105,11 @@ class SaisirFicheFraisController extends AbstractController
         $formFraisHF->handleRequest($request);
 
         if ($formFraisHF->isSubmitted() && $formFraisHF->isValid()) {
+
+            $ligneFraisHorsForfait->setFicheFrais($ficheMoisUser);
+            $ligneFraisHorsForfait->setDate($formFraisHF->get('date')->getData());
+            $ligneFraisHorsForfait->setLibelle($formFraisHF->get('libelle')->getData());
+            $ligneFraisHorsForfait->setMontant($formFraisHF->get('montant')->getData());
             $entityManager->persist($ligneFraisHorsForfait);
             $entityManager->flush();
 
