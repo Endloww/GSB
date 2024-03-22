@@ -18,7 +18,7 @@ class FicheController extends AbstractController
     {
         $selectedFiche = null;
         $user = $this->getUser();
-        $fichesFrais = $doctrine->getRepository(FicheFrais::class)->findBy(['user' => $user]);
+        $fichesFrais = $doctrine->getRepository(FicheFrais::class)->findBy(['user' => $user], ['mois' => 'DESC']);
         $form = $this->createForm(FicheType::class, $fichesFrais);
         $form->handleRequest($request);
 

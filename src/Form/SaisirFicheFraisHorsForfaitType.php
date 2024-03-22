@@ -23,13 +23,10 @@ class SaisirFicheFraisHorsForfaitType extends AbstractType
                 'format' => 'yyyyMMdd',
                 'years' => [date('Y')],
                 'months' => [date('m')]
-
             ])
             ->add('montant', MoneyType::class, [
                 'currency' => 'EUR',
-                'divisor' => 100,
             ])
-
         ;
     }
 

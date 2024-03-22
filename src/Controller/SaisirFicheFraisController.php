@@ -7,12 +7,14 @@ use App\Entity\FicheFrais;
 use App\Entity\LigneFraisForfait;
 use App\Entity\LigneFraisHorsForfait;
 use App\Form\EtatType;
+use App\Form\FicheType;
 use App\Form\SaisirFicheFraisForfaitType;
 use App\Form\SaisirFicheFraisHorsForfaitType;
 use App\Repository\EtatRepository;
 use App\Repository\FicheFraisRepository;
 use App\Repository\FraisForfaitRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use PhpParser\Node\Stmt\If_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +24,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class SaisirFicheFraisController extends AbstractController
 {
     #[Route('/saisir-fiche-frais', name: 'app_saisir_fiche_frais')]
-    public function index(Request $request, EntityManagerInterface $entityManager, FicheFraisRepository $ficheFraisRepository, FraisForfaitRepository $forfaitRepository, EtatRepository $etatRepository): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, FicheFraisRepository $ficheFraisRepository, FraisForfaitRepository $forfaitRepository, EtatRepository $etatRepository, ManagerRegistry $doctrine): Response
     {
         $dateActuel = new \DateTime('now');
         $moisActuel = $dateActuel->format('Ym');
@@ -113,13 +115,19 @@ class SaisirFicheFraisController extends AbstractController
             $entityManager->persist($ligneFraisHorsForfait);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_etat_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_saisir_fiche_frais', [], Response::HTTP_SEE_OTHER);
         }
+        $selectedFiche = null;
+        $user = $this->getUser();
+
+            $selectedFiche = $doctrine->getRepository(FicheFrais::class)->findOneBy(['mois' => $moisActuel, 'user' => $user]);
+
 
         return $this->render('saisir_fiche_frais/index.html.twig', [
             'controller_name' => 'SaisirFicheFraisController',
             'formFraisHF' => $formFraisHF,
-            'formFraisF' =>$formFraisF
+            'formFraisF' =>$formFraisF,
+            'selectedFiche' => $selectedFiche,
         ]);
     }
 }

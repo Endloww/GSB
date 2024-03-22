@@ -47,8 +47,27 @@
                 <button type="reset" class="btn btn-dark custom-button mb-3 ps-5 pe-5 mt-3">{{ button_label|default('Effacer') }}</button>
             </div>
             {{ form_end(formFraisHF) }}
-
         </div>
+    {% if selectedFiche is not null %}
+        <table class="container table">
+            <thead>
+            <th>Date</th>
+            <th>Libellé</th>
+            <th>Montant</th>
+            </thead>
+            <tbody>
+            {% for uneLigneFraisHorsForfait in selectedFiche.ligneFraisHorsForfait %}
+                <tr>
+                    <td>{{ uneLigneFraisHorsForfait.date|date('Y/m/d') }}</td>
+                    <td>{{ uneLigneFraisHorsForfait.libelle }}</td>
+                    <td>{{ uneLigneFraisHorsForfait.montant }}</td>
+                    <td>{{ include('ligne_frais_hors_forfait/_delete_form.html.twig') }}</td>
+                </tr>
+            {%endfor%}
+            </tbody>
+
+        </table>
+    {% endif %}
 </div>
     <br/><br/>
 
