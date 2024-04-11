@@ -71,3 +71,6 @@
 .pop {
     transform: scale(0.50); /* Réduire légèrement la taille du bouton */
 }
+.comptable {
+    filter: hue-rotate(320deg);
+}

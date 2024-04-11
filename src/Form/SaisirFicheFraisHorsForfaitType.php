@@ -19,10 +19,8 @@ class SaisirFicheFraisHorsForfaitType extends AbstractType
                 'attr' => ['class' => 'inputMargin']
             ])
             ->add('date', DateType::class,[
-                'widget' => 'choice',
-                'format' => 'yyyyMMdd',
-                'years' => [date('Y')],
-                'months' => [date('m')]
+                'widget' => 'single_text',
+                'format' => 'yyyy-MM-dd'
             ])
             ->add('montant', MoneyType::class, [
                 'currency' => 'EUR',
