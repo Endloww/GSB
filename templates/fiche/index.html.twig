@@ -15,9 +15,9 @@
         table td, table thead {border: 1px solid #ddd;padding: 8px;}
     </style>
 <div class="center">
-    <h3 class="mb-3">
+    <h1 class="mb-3">
         {%  if selectedFiche is null %}Séléctionner une date  {% else %}Fiche de frais du mois {{selectedFiche.moisFormatted|date('m-Y')}}{% endif %}
-    </h3>
+    </h1>
     {{ form_start(form) }}
     {{ form_row(form.date)}}
         <button type="submit" class="btn btn-dark custom-button mb-3 ps-5 pe-5 mt-3">Valider</button>
