@@ -29,10 +29,9 @@ class ComptableController extends AbstractController
             ])
             ->getForm();
 
-        $repository = $this->getDoctrine()->getRepository(FicheFrais::class);
+    /*    $repository = $doctrine->getManager()->getRepository(FicheFrais::class);
         $query = $repository->createQueryBuilder('f')
-            ->select('MONTH(f.mois) as month')
-            ->groupBy('month')
+            ->distinct('f.mois as month')
             ->getQuery();
 
         $months = $query->getResult();
@@ -49,10 +48,20 @@ class ComptableController extends AbstractController
                 'attr' => ['class' => 'form-select'],
             ])
             ->getForm();
+    */
+        if ($form_visiteur->isSubmitted() && $form_visiteur->isValid()){
+            $allFicheByUser = $doctrine->getRepository(FicheFrais::class)->findBy(['user' => $form_visiteur->get('user')->getData()]);
+
+        } else {
+            dd($form_visiteur);
+            $allFicheByUser = [];
+        }
 
 
         return $this->render('comptable/index.html.twig', [
             'form_visiteur' => $form_visiteur->createView(),
-            'form_mois' => $form_mois->createView(),
+            'allFicheByUser' => $allFicheByUser,
+           // 'form_mois' => $form_mois->createView(),
         ]);
-    }}
+    }
+}

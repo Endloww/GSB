@@ -37,14 +37,25 @@
 
                 <div id="userBlock" class="corpsForm">
                         <h3>Sélectionnez un utilisateur</h3>
-                        {{ form_start(form) }}
-                        {{ form_widget(form) }}
-                        {{ form_end(form) }}
+                        {{ form_start(form_visiteur) }}
+                        {{ form_widget(form_visiteur) }}
                     <button type="submit" class="btn btn-dark custom-button mb-3 ps-5 pe-5 mt-3 bg-img">
                         <h5>Valider</h5>
                     </button>
+                        {{ form_end(form_visiteur) }}
+
                     <br/>
                 </div>
+            <table class="container table">
+                {% for fiche in allFicheByUser %}
+                <tr>
+                    <td>{{ fiche.dateCreation|date('d/m/Y') }}</td>
+                    <td>{{ fiche.etat }}</td>
+                    <td>{{ fiche.montantValide }}</td>
+                    <td><a href="{{ path('fiche_show', {'id': fiche.id}) }}">show</a></td>
+                </tr>
+                {% endfor %}
+            </table>
 
             <div id="monthBlock" class="corpsForm" style="display: none;">
                 <h3>Sélectionnez un mois</h3>
