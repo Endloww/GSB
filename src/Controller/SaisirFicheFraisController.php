@@ -84,7 +84,7 @@ class SaisirFicheFraisController extends AbstractController
             $entityManager->persist($ficheMoisActuel);
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_etat_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_saisir_fiche_frais', [], Response::HTTP_SEE_OTHER);
         }
 
         $ficheMoisUser = $ficheFraisRepository->findOneBy(['user' => $this->getUser(), 'mois' => $moisActuel]);
@@ -112,6 +112,7 @@ class SaisirFicheFraisController extends AbstractController
             $ligneFraisHorsForfait->setDate($formFraisHF->get('date')->getData());
             $ligneFraisHorsForfait->setLibelle($formFraisHF->get('libelle')->getData());
             $ligneFraisHorsForfait->setMontant($formFraisHF->get('montant')->getData());
+            $ligneFraisHorsForfait->setCategorie($formFraisHF->get('categorie')->getData());
             $entityManager->persist($ligneFraisHorsForfait);
             $entityManager->flush();
 

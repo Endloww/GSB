@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Categorie;
 use App\Entity\LigneFraisHorsForfait;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -24,6 +26,10 @@ class SaisirFicheFraisHorsForfaitType extends AbstractType
             ])
             ->add('montant', MoneyType::class, [
                 'currency' => 'EUR',
+            ])
+            ->add('categorie', EntityType::class, [
+                'class' => Categorie::class,
+                'choice_label' => 'libelle',
             ])
         ;
     }

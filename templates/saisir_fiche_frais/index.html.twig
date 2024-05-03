@@ -53,6 +53,7 @@
             <thead>
             <th>Date</th>
             <th>Libellé</th>
+            <th>Catégorie</th>
             <th>Montant</th>
             </thead>
             <tbody>
@@ -60,6 +61,7 @@
                 <tr>
                     <td>{{ uneLigneFraisHorsForfait.date|date('Y/m/d') }}</td>
                     <td>{{ uneLigneFraisHorsForfait.libelle }}</td>
+                    <td>{{ uneLigneFraisHorsForfait.categorie.libelle }}</td>
                     <td>{{ uneLigneFraisHorsForfait.montant }}</td>
                     <td>{{ include('ligne_frais_hors_forfait/_delete_form.html.twig') }}</td>
                 </tr>

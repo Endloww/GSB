@@ -26,6 +26,9 @@ class LigneFraisHorsForfait
     #[ORM\ManyToOne(inversedBy: 'ligneFraisHorsForfait')]
     private ?FicheFrais $ficheFrais = null;
 
+    #[ORM\ManyToOne(inversedBy: 'ligneFraisHorsForfait')]
+    private ?Categorie $categorie = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +78,18 @@ class LigneFraisHorsForfait
     public function setFicheFrais(?FicheFrais $ficheFrais): static
     {
         $this->ficheFrais = $ficheFrais;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Categorie
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?Categorie $categorie): static
+    {
+        $this->categorie = $categorie;
 
         return $this;
     }
